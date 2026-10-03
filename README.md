@@ -17,13 +17,23 @@
 
 ## Quick start
 
+**1. Clone and enter the folder**
 ```bash
 git clone https://github.com/vaanyaagarwal27/odd-jobs.git
 cd odd-jobs/howlong
-pip3 install -r requirements.txt
-python3 -m streamlit run app.py
 ```
 
-Note you need a `.env` file in the agent folder with
-`GEMINI_API_KEY=your_key_here`, free from
-https://aistudio.google.com/apikey
+**2. Install what it needs**
+```bash
+pip3 install -r requirements.txt
+```
+
+**3. Get a free Gemini API key from https://aistudio.google.com/apikey and put it in a `.env` file in this folder**
+```
+GEMINI_API_KEY=your_key_here
+```
+
+**4. Run it**
+```bash
+python3 -m streamlit run app.py
+```
