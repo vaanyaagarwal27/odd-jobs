@@ -20,7 +20,7 @@
 **1. Clone and enter the folder**
 ```bash
 git clone https://github.com/vaanyaagarwal27/odd-jobs.git
-cd odd-jobs/howlong
+cd odd-jobs/<agent-folder>
 ```
 
 **2. Install what it needs**
@@ -37,3 +37,5 @@ GEMINI_API_KEY=your_key_here
 ```bash
 python3 -m streamlit run app.py
 ```
+
+Each agent's own page has its specific setup.
