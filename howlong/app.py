@@ -27,6 +27,57 @@ def call_gemini(prompt):
 # ── Page config ──────────────────────────────────────────────────────────────
 
 st.set_page_config(page_title="How Long Will It Last?", page_icon="💸")
+st.markdown("""
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap');
+
+.stApp { background: #FAF4EA; }
+html, body, [class*="st-"], button, input, textarea, select {
+    font-family: 'DM Sans', sans-serif;
+}
+.block-container { max-width: 680px; padding-top: 3rem; }
+
+h1, h2, h3 {
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: #16150F;
+}
+
+.stButton > button {
+    background: #16150F;
+    color: #FAF4EA;
+    border: none;
+    border-radius: 999px;
+    font-weight: 500;
+    padding: 0.65rem 1.8rem;
+}
+.stButton > button:hover { background: #33301F; color: #FAF4EA; }
+
+[data-testid="stMetric"] {
+    background: #F7EBB5;
+    border-radius: 22px;
+    padding: 1.3rem 1.5rem;
+}
+[data-testid="stMetricValue"] {
+    font-size: 3.4rem;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+}
+[data-testid="stMetricLabel"] {
+    font-weight: 500;
+    opacity: 0.55;
+}
+
+textarea, input, [data-baseweb="input"], [data-baseweb="textarea"],
+[data-baseweb="base-input"] {
+    border-radius: 16px !important;
+}
+[data-testid="stDataFrame"] { border-radius: 16px; overflow: hidden; }
+
+[data-testid="stAlert"] { border-radius: 16px; }
+hr { border-color: #E4D8C4; }
+</style>
+""", unsafe_allow_html=True)
 st.title("💸 How Long Will It Last?")
 
 # ── Inputs ────────────────────────────────────────────────────────────────────
@@ -135,7 +186,7 @@ Messages:
     st.dataframe(display_df, use_container_width=True, hide_index=True)
 
     st.subheader("Spending by category")
-    st.bar_chart(category_totals)
+    st.bar_chart(category_totals, color="#EFCF5C")
 
     # ── Step 5: Suggestions via Gemini ───────────────────────────────────────
 
