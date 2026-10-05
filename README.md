@@ -15,6 +15,11 @@
   how many days the money has to last, and it tells you your daily
   budget and where it's actually going
 
+- [📦 ShipBrief](shipbrief) - Paste a GitHub repo link or describe what
+  you built, and it writes the Instagram caption, hashtags and a
+  one-line learning reflection — in a builder's voice, not an
+  influencer's
+
 ## Quick start
 
 **1. Clone and enter the folder**
