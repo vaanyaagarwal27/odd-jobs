@@ -1,0 +1,8 @@
+# Simon Willison
+https://simonwillison.net/atom/everything/
+# OpenAI
+https://openai.com/news/rss.xml
+# Google DeepMind
+https://deepmind.google/blog/rss.xml
+# Unwind AI (Shubham Saboo)
+https://rss.beehiiv.com/feeds/fMHDv0Uk41.xml

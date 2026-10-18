@@ -27,6 +27,7 @@ fast, still new to a lot of jargon. A builder, not a researcher.
 - drama, beefs, debates, hot takes
 - anything she can consume but cannot act on or learn from
 - non-AI tech, unless it changes how she would build
+- company case studies and customer stories ("how Company X uses Y"), unless they reveal a specific technique Vaanya could use in her own agents
 Example: "Google releases a new Gemini model" is a story.
 "People are debating Gemini vs Opus" is not.
 

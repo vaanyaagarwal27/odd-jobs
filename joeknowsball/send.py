@@ -1,6 +1,9 @@
 import json
 import os
+import re
 import time
+import calendar
+import feedparser
 import requests
 from dotenv import load_dotenv
 from google import genai
@@ -27,21 +30,47 @@ def call_gemini(prompt):
                 raise exc
 
 
+here = os.path.dirname(__file__)
+
 top_ids = requests.get("https://hacker-news.firebaseio.com/v0/topstories.json").json()[:30]
-stories = [requests.get(f"https://hacker-news.firebaseio.com/v0/item/{id}.json").json() for id in top_ids]
-
-soul = open(os.path.join(os.path.dirname(__file__), "SOUL.md")).read()
-
-for s in stories:
+hn_stories = [requests.get(f"https://hacker-news.firebaseio.com/v0/item/{id}.json").json() for id in top_ids]
+for s in hn_stories:
     s["_url"] = s.get("url", f"https://news.ycombinator.com/item?id={s['id']}")
 
-numbered = "\n".join(
-    f"{i+1}. {s['title']} ({s.get('score', 0)} points, {s.get('descendants', 0)} comments)"
-    for i, s in enumerate(stories)
-)
+cutoff = time.time() - 259200
+feed_stories = []
+feed_urls = [l.strip() for l in open(os.path.join(here, "sources.txt")) if l.strip() and not l.startswith("#")]
+for feed_url in feed_urls:
+    feed = feedparser.parse(feed_url)
+    fresh = []
+    for e in feed.entries:
+        t = e.get("published_parsed") or e.get("updated_parsed")
+        if t and calendar.timegm(t) >= cutoff:
+            snippet = re.sub(r"<[^>]+>", "", e.get("summary", ""))[:300]
+            fresh.append({"title": e.title, "_url": e.link, "_source": feed.feed.title, "_snippet": snippet})
+    print(feed.feed.get("title", feed_url), len(fresh), "fresh entries")
+    feed_stories.extend(fresh)
+
+soul = open(os.path.join(here, "SOUL.md")).read()
+
+all_stories = hn_stories + feed_stories
+
+def story_label(s):
+    if "_source" in s:
+        return f"(from {s['_source']})"
+    return f"({s.get('score', 0)} points, {s.get('descendants', 0)} comments)"
+
+def story_line(i, s):
+    line = f"{i+1}. {s['title']} {story_label(s)}"
+    if "_snippet" in s and s["_snippet"]:
+        line += f"\n   {s['_snippet']}"
+    return line
+
+numbered = "\n".join(story_line(i, s) for i, s in enumerate(all_stories))
+n = len(all_stories)
 pick_prompt = (
-    f"{soul}\n\nHere are today's 30 Hacker News stories:\n{numbered}\n\n"
-    "Return ONLY a JSON array of the numbers (1-30) of up to 7 stories worth covering today, "
+    f"{soul}\n\nHere are today's {n} stories:\n{numbered}\n\n"
+    f"Return ONLY a JSON array of the numbers (1-{n}) of up to 7 stories worth covering today, "
     "most important first. Return [] if none qualify."
 )
 
@@ -59,7 +88,7 @@ if not chosen_indexes:
     print("Nothing to send today.")
     exit()
 
-chosen = [stories[i] for i in chosen_indexes]
+chosen = [all_stories[i] for i in chosen_indexes]
 for s in chosen:
     print(s["title"])
 
