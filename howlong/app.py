@@ -118,6 +118,7 @@ Rules:
     "amount"   : number (positive, in INR, no commas or symbols)
     "merchant" : string (who was paid — UPI ID, merchant name, or "Unknown")
     "category" : one of ["food", "travel", "stationery", "shopping", "other"]
+- Normalise merchant names: collapse variations of the same merchant (e.g. "ZOMATO LIMITED", "Zomato", "ZOMATO") into one consistent, clean readable form (e.g. "Zomato").
 - If you cannot determine the amount reliably, skip that message.
 - Return raw JSON only — no markdown, no explanation.
 
