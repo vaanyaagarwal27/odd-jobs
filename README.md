@@ -2,7 +2,7 @@
   <h1>ODD JOBS</h1>
   <b>Small agents for small annoying problems.</b>
   <br>
-  Each one is a single file. Runs on your laptop. Free API key.
+  Each one is a small, self-contained folder. Free API keys.
 </div>
 
 ---
@@ -20,6 +20,10 @@
   one-line learning reflection — in a builder's voice, not an
   influencer's
 
+- [🗞️ Joe](joeknowsball) - Every morning at 7, a Telegram message from
+  a friend who read everything in AI overnight — what happened, what the
+  new words mean, and why it matters to you
+
 ## Quick start
 
 **1. Clone and enter the folder**
@@ -33,14 +37,4 @@ cd odd-jobs/<agent-folder>
 pip3 install -r requirements.txt
 ```
 
-**3. Get a free Gemini API key from https://aistudio.google.com/apikey and put it in a `.env` file in this folder**
-```
-GEMINI_API_KEY=your_key_here
-```
-
-**4. Run it**
-```bash
-python3 -m streamlit run app.py
-```
-
-Each agent's own page has its specific setup.
+Each agent's own page has the rest: which keys it needs and how to run it.

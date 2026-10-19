@@ -19,23 +19,41 @@ chat_id = os.environ["TELEGRAM_CHAT_ID"]
 
 
 def call_gemini(prompt):
-    """Up to 6 attempts with 10 / 30 / 60 / 120 / 240 s back-off.
-    Only retries on 429/500/502/503/504; raises immediately on all other errors."""
+    """Cycles through fallback models; up to 6 retryable attempts with 10/30/60/120/240 s back-off.
+    400/404 removes the model and retries the next immediately. Other non-retryable errors raise."""
+    models = ["gemini-3.8-flash", "gemini-3.5-flash", "gemini-3.7-flash"]
     delays = [10, 30, 60, 120, 240]
     retryable = {429, 500, 502, 503, 504}
-    for attempt in range(6):
+    defunct = {400, 404}
+    model_idx = 0
+    delay_idx = 0
+    while True:
+        if not models:
+            raise RuntimeError("call_gemini: all models exhausted")
+        model = models[model_idx % len(models)]
+        print(f"call_gemini trying {model}...")
         try:
-            return client.models.generate_content(model=MODEL, contents=prompt)
+            result = client.models.generate_content(model=model, contents=prompt)
+            print(f"call_gemini answered: {model}")
+            return result
         except Exception as exc:
             code = getattr(exc, "status_code", None) or getattr(exc, "code", None)
-            if code is not None and code not in retryable:
+            if code in defunct:
+                print(f"call_gemini {model} returned {code}, removing for this run")
+                models.remove(model)
+                if not models:
+                    raise
+            elif code is not None and code not in retryable:
                 print(f"call_gemini error (not retrying): {exc}")
                 raise
-            print(f"call_gemini attempt {attempt + 1} failed ({code}): {exc}")
-            if attempt < 5:
-                time.sleep(delays[attempt])
             else:
-                raise
+                print(f"call_gemini attempt {delay_idx + 1} failed on {model} ({code}): {exc}")
+                if delay_idx < 5:
+                    time.sleep(delays[delay_idx])
+                    delay_idx += 1
+                    model_idx += 1
+                else:
+                    raise
 
 
 try:
