@@ -12,20 +12,26 @@ from google import genai
 load_dotenv()
 
 client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
-MODEL = "gemini-2.5-flash"
+MODEL = "gemini-3.8-flash"
 
 token = os.environ["TELEGRAM_BOT_TOKEN"]
 chat_id = os.environ["TELEGRAM_CHAT_ID"]
 
 
 def call_gemini(prompt):
-    """Up to 6 attempts with 10 / 30 / 60 / 120 / 240 s back-off; re-raises on final failure."""
+    """Up to 6 attempts with 10 / 30 / 60 / 120 / 240 s back-off.
+    Only retries on 429/500/502/503/504; raises immediately on all other errors."""
     delays = [10, 30, 60, 120, 240]
+    retryable = {429, 500, 502, 503, 504}
     for attempt in range(6):
         try:
             return client.models.generate_content(model=MODEL, contents=prompt)
         except Exception as exc:
-            print(f"call_gemini attempt {attempt + 1} failed: {exc}")
+            code = getattr(exc, "status_code", None) or getattr(exc, "code", None)
+            if code is not None and code not in retryable:
+                print(f"call_gemini error (not retrying): {exc}")
+                raise
+            print(f"call_gemini attempt {attempt + 1} failed ({code}): {exc}")
             if attempt < 5:
                 time.sleep(delays[attempt])
             else:

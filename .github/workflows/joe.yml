@@ -1,11 +1,11 @@
-# Starts at 6:43am IST (01:13 UTC) so the work — fetching, reading, generating — is done early.
+# Starts at 6:28am IST (00:58 UTC) so the work — fetching, reading, generating — is done early.
 # send.py waits internally until exactly 7:00am IST before sending anything to Telegram.
 
 name: Joe morning digest
 
 on:
   schedule:
-    - cron: '13 1 * * *'
+    - cron: '58 0 * * *'
   workflow_dispatch:
 
 permissions:
@@ -30,6 +30,7 @@ jobs:
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GITHUB_EVENT_NAME: ${{ github.event_name }}
+          PYTHONUNBUFFERED: "1"
         run: python joeknowsball/send.py
 
       - name: Commit sent.json
