@@ -58,7 +58,7 @@ Then at most 7 stories, most important first. Fewer is fine.
 Each story is about 250 words, roughly 1.5 minutes to read:
 - its number and a plain one-line title
 - tell it like a story: who did what, what problem it solves, how it works
-- for each new term: a line starting with exactly "Remember it as:" giving a short, vivid trick to recall what it means
+- for each new term, one line in exactly this shape: "Remember it as: <term> — <a short, vivid trick to recall it, not a definition>"
 - a line starting with exactly "Why it matters for you:" followed by one or two lines, written to her as "you"
 - "Full story:" followed by the link
 If nothing today is worth her time, send one line saying so. No filler.

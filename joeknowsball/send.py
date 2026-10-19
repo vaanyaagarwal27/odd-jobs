@@ -3,6 +3,7 @@ import os
 import re
 import time
 import calendar
+import datetime
 import feedparser
 import requests
 from dotenv import load_dotenv
@@ -34,6 +35,16 @@ def call_gemini(prompt):
 try:
     here = os.path.dirname(__file__)
 
+    sent_path = os.path.join(here, "sent.json")
+    if os.path.exists(sent_path):
+        sent_links = json.load(open(sent_path))
+    else:
+        sent_links = {}
+    today = datetime.date.today()
+    cutoff_date = today - datetime.timedelta(days=14)
+    sent_links = {url: date for url, date in sent_links.items()
+                  if datetime.date.fromisoformat(date) >= cutoff_date}
+
     top_ids = requests.get("https://hacker-news.firebaseio.com/v0/topstories.json").json()[:30]
     hn_stories = [requests.get(f"https://hacker-news.firebaseio.com/v0/item/{id}.json").json() for id in top_ids]
     for s in hn_stories:
@@ -56,6 +67,9 @@ try:
     soul = open(os.path.join(here, "SOUL.md")).read()
 
     all_stories = hn_stories + feed_stories
+    before_filter = len(all_stories)
+    all_stories = [s for s in all_stories if s["_url"] not in sent_links]
+    print(f"Skipped {before_filter - len(all_stories)} already-sent stories")
 
     def story_label(s):
         if "_source" in s:
@@ -76,13 +90,36 @@ try:
         "most important first. Return [] if none qualify."
     )
 
-    raw = call_gemini(pick_prompt).text.strip()
-    if raw.startswith("```"):
-        raw = raw.split("```")[1]
-        if raw.startswith("json"):
-            raw = raw[4:]
-        raw = raw.strip()
-    chosen_indexes = [n - 1 for n in json.loads(raw)]
+    def _try_parse_pick(response_text):
+        raw = response_text.strip()
+        if not raw:
+            raise ValueError("empty response from Gemini")
+        if raw.startswith("```"):
+            raw = raw.split("```")[1]
+            if raw.startswith("json"):
+                raw = raw[4:]
+            raw = raw.strip()
+        try:
+            return json.loads(raw)
+        except json.JSONDecodeError:
+            print(f"Pass 1 JSON parse failed. Raw response:\n{raw}")
+            m = re.search(r'\[.*?\]', raw, re.DOTALL)
+            if m:
+                return json.loads(m.group())
+            raise ValueError("no [...] found in pass 1 response")
+
+    picked = None
+    for attempt in range(2):
+        response_text = call_gemini(pick_prompt).text
+        try:
+            picked = _try_parse_pick(response_text)
+            break
+        except Exception as e:
+            if attempt == 0:
+                print(f"Pass 1 attempt 1 failed ({e}), retrying...")
+            else:
+                raise RuntimeError(f"Pass 1 failed on both attempts: {e}")
+    chosen_indexes = [n - 1 for n in picked]
 
     if not chosen_indexes:
         tg_url = f"https://api.telegram.org/bot{token}/sendMessage"
@@ -121,12 +158,22 @@ try:
         print(f"WARNING: {p} was not replaced — no matching story URL found")
 
     tg_url = f"https://api.telegram.org/bot{token}/sendMessage"
-    for piece in digest.split("---"):
-        piece = piece.strip()
-        if not piece:
-            continue
+    pieces = [p.strip() for p in digest.split("---") if p.strip()]
+    hype_words = ["busy", "huge", "significant", "major", "crazy", "massive", "exciting", "game-changer", "revolutionary"]
+    if pieces:
+        triggered = next((w for w in hype_words if w in pieces[0].lower()), None)
+        if triggered:
+            story_count = len(pieces) - 1
+            pieces[0] = f"Morning Vaanya. {story_count} stories today."
+            print(f"Greeting replaced — triggered by: '{triggered}'")
+    for piece in pieces:
         response = requests.post(tg_url, json={"chat_id": chat_id, "text": piece})
         print(response.status_code, response.text)
+    today_str = today.isoformat()
+    for s in chosen:
+        sent_links[s["_url"]] = today_str
+    with open(sent_path, "w") as f:
+        json.dump(sent_links, f, indent=2)
 except Exception as exc:
     tg_url = f"https://api.telegram.org/bot{token}/sendMessage"
     requests.post(tg_url, json={"chat_id": chat_id, "text": "Joe couldn't finish this morning's digest: " + str(exc)[:300]})
