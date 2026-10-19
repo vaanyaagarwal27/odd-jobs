@@ -157,6 +157,15 @@ try:
     for p in unreplaced:
         print(f"WARNING: {p} was not replaced — no matching story URL found")
 
+    if os.environ.get("GITHUB_EVENT_NAME") == "schedule":
+        ist_offset = datetime.timedelta(hours=5, minutes=30)
+        now_ist = datetime.datetime.utcnow() + ist_offset
+        target_ist = now_ist.replace(hour=7, minute=0, second=0, microsecond=0)
+        if now_ist < target_ist:
+            wait_seconds = (target_ist - now_ist).total_seconds()
+            print(f"Joe waiting {wait_seconds:.0f}s until 7:00am IST...")
+            time.sleep(wait_seconds)
+
     tg_url = f"https://api.telegram.org/bot{token}/sendMessage"
     pieces = [p.strip() for p in digest.split("---") if p.strip()]
     hype_words = ["busy", "huge", "significant", "major", "crazy", "massive", "exciting", "game-changer", "revolutionary"]
