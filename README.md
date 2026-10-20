@@ -1,6 +1,6 @@
 <div align="center">
   <h1>ODD JOBS</h1>
-  <b>Small agents for small annoying problems.</b>
+  <b>Small AI agents for small annoying problems. Open to contributors.</b>
   <br>
   Each one is a small, self-contained folder. Free API keys.
 </div>
