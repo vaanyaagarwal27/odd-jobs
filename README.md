@@ -38,3 +38,7 @@ pip3 install -r requirements.txt
 ```
 
 Each agent's own page has the rest: which keys it needs and how to run it.
+
+## Contributing
+
+Want to add a project? Read [CONTRIBUTING.md](CONTRIBUTING.md). Odd Jobs is MIT licensed.
