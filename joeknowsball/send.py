@@ -69,8 +69,8 @@ try:
     sent_links = {url: date for url, date in sent_links.items()
                   if datetime.date.fromisoformat(date) >= cutoff_date}
 
-    top_ids = requests.get("https://hacker-news.firebaseio.com/v0/topstories.json").json()[:30]
-    hn_stories = [requests.get(f"https://hacker-news.firebaseio.com/v0/item/{id}.json").json() for id in top_ids]
+    top_ids = requests.get("https://hacker-news.firebaseio.com/v0/topstories.json", timeout=15).json()[:30]
+    hn_stories = [requests.get(f"https://hacker-news.firebaseio.com/v0/item/{id}.json", timeout=15).json() for id in top_ids]
     for s in hn_stories:
         s["_url"] = s.get("url", f"https://news.ycombinator.com/item?id={s['id']}")
 
@@ -143,7 +143,18 @@ try:
                 print(f"Pass 1 attempt 1 failed ({e}), retrying...")
             else:
                 raise RuntimeError(f"Pass 1 failed on both attempts: {e}")
-    chosen_indexes = [n - 1 for n in picked]
+    seen = set()
+    chosen_indexes = []
+    for num in picked:
+        if not isinstance(num, (int, float)) or num != int(num) or not (1 <= int(num) <= n):
+            print(f"WARNING: pass 1 returned invalid pick {num!r}, dropping")
+            continue
+        num = int(num)
+        if num in seen:
+            print(f"WARNING: pass 1 returned duplicate {num}, dropping")
+            continue
+        seen.add(num)
+        chosen_indexes.append(num - 1)
 
     if not chosen_indexes:
         tg_url = f"https://api.telegram.org/bot{token}/sendMessage"
@@ -156,10 +167,29 @@ try:
         print(s["title"])
 
     article_texts = []
+    valid_chosen = []
     for s in chosen:
-        text = requests.get("https://r.jina.ai/" + s["_url"], timeout=30).text[:15000]
-        print(s["_url"], len(text), "chars")
-        article_texts.append(text)
+        try:
+            resp = requests.get("https://r.jina.ai/" + s["_url"], timeout=30)
+            if resp.status_code != 200:
+                print(f"Jina fetch failed for {s['_url']}: status {resp.status_code}, skipping")
+                continue
+            text = resp.text[:15000]
+            if len(text) < 500:
+                print(f"Jina fetch too short for {s['_url']}: {len(text)} chars, skipping")
+                continue
+            print(s["_url"], len(text), "chars")
+            article_texts.append(text)
+            valid_chosen.append(s)
+        except Exception as exc:
+            print(f"Jina fetch error for {s['_url']}: {exc}, skipping")
+    chosen = valid_chosen
+
+    if not chosen:
+        tg_url = f"https://api.telegram.org/bot{token}/sendMessage"
+        requests.post(tg_url, json={"chat_id": chat_id, "text": "Good morning Vaanya. Nothing worth your time today."})
+        print("Nothing to send today — all articles failed to fetch.")
+        exit()
 
     reading_parts = []
     for i, (s, text) in enumerate(zip(chosen, article_texts), 1):
@@ -174,10 +204,18 @@ try:
 
     digest = call_gemini(prompt).text
 
+    pieces = [p.strip() for p in digest.split("---") if p.strip()]
+    piece_to_story_num = {}
+    for idx, piece in enumerate(pieces):
+        m = re.search(r'\[LINK (\d+)\]', piece)
+        if m:
+            piece_to_story_num[idx] = int(m.group(1))
+
     link_map = {f"[LINK {i}]": s["_url"] for i, s in enumerate(chosen, 1)}
-    for placeholder, url in link_map.items():
-        digest = digest.replace(placeholder, url)
-    unreplaced = re.findall(r'\[LINK \d+\]', digest)
+    for idx in range(len(pieces)):
+        for placeholder, url in link_map.items():
+            pieces[idx] = pieces[idx].replace(placeholder, url)
+    unreplaced = [tok for piece in pieces for tok in re.findall(r'\[LINK \d+\]', piece)]
     for p in unreplaced:
         print(f"WARNING: {p} was not replaced — no matching story URL found")
 
@@ -191,22 +229,37 @@ try:
             time.sleep(wait_seconds)
 
     tg_url = f"https://api.telegram.org/bot{token}/sendMessage"
-    pieces = [p.strip() for p in digest.split("---") if p.strip()]
     hype_words = ["busy", "huge", "significant", "major", "crazy", "massive", "exciting", "game-changer", "revolutionary"]
     if pieces:
-        triggered = next((w for w in hype_words if w in pieces[0].lower()), None)
+        triggered = next((w for w in hype_words if re.search(r'\b' + re.escape(w) + r'\b', pieces[0], re.IGNORECASE)), None)
         if triggered:
             story_count = len(pieces) - 1
             pieces[0] = f"Morning Vaanya. {story_count} stories today."
             print(f"Greeting replaced — triggered by: '{triggered}'")
-    for piece in pieces:
-        response = requests.post(tg_url, json={"chat_id": chat_id, "text": piece})
-        print(response.status_code, response.text)
+    send_errors = []
     today_str = today.isoformat()
-    for s in chosen:
-        sent_links[s["_url"]] = today_str
+    for i, piece in enumerate(pieces):
+        resp = requests.post(tg_url, json={"chat_id": chat_id, "text": piece})
+        print(resp.status_code, resp.text)
+        try:
+            ok = resp.status_code == 200 and resp.json().get("ok") is True
+        except Exception:
+            ok = False
+        if ok:
+            story_num = piece_to_story_num.get(i)
+            if story_num is not None and 1 <= story_num <= len(chosen):
+                sent_links[chosen[story_num - 1]["_url"]] = today_str
+        else:
+            print(f"Telegram delivery failed for piece {i}: status {resp.status_code}")
+            send_errors.append(i)
+    written_nums = set(piece_to_story_num.values())
+    for i, s in enumerate(chosen, 1):
+        if i not in written_nums:
+            sent_links[s["_url"]] = today_str
     with open(sent_path, "w") as f:
         json.dump(sent_links, f, indent=2)
+    if send_errors:
+        raise RuntimeError(f"Telegram delivery failed for {len(send_errors)} piece(s): indices {send_errors}")
 except Exception as exc:
     tg_url = f"https://api.telegram.org/bot{token}/sendMessage"
     requests.post(tg_url, json={"chat_id": chat_id, "text": "Joe couldn't finish this morning's digest: " + str(exc)[:300]})
