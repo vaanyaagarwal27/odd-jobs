@@ -1,9 +1,4 @@
 {
-  "https://safedep.io/litellm-pypi-compromise-credential-stealer-backdoor/": "2026-10-22",
-  "https://github.com/omnara-ai/omnara": "2026-10-22",
-  "https://openai.com/index/openai-models-google-cloud": "2026-10-22",
-  "https://openai.com/index/coordinated-disclosure-of-critical-vulnerabilities": "2026-10-22",
-  "https://alterauth.com/": "2026-10-22",
   "https://openai.com/index/decisions-api": "2026-10-23",
   "https://www.anthropic.com/research/formal-verification": "2026-10-23",
   "https://simonwillison.net/2026/Oct/22/donating-agent-skills/": "2026-10-23",
@@ -49,5 +44,10 @@
   "https://openai.com/index/a-thousand-fewer-paths-to-root": "2026-11-05",
   "https://simonwillison.net/2026/Nov/3/datasette-agent/": "2026-11-05",
   "https://deepmind.google/blog/agentic-cheminformatics-with-google-antigravity/": "2026-11-05",
-  "https://openai.com/index/scaling-git-at-openai": "2026-11-05"
+  "https://openai.com/index/scaling-git-at-openai": "2026-11-05",
+  "https://mcp-explained.com/": "2026-11-06",
+  "https://deepmind.google/blog/gemini-omni-12-flash-fast-and-cost-effective-with-longer-clips/": "2026-11-06",
+  "https://github.com/rivet-dev/rivet": "2026-11-06",
+  "https://github.com/anthropics/claude-code/issues/107757": "2026-11-06",
+  "https://simonwillison.net/2026/Nov/3/qwen-can-interpret-model-weights/": "2026-11-06"
 }
