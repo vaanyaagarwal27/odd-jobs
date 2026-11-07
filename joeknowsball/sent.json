@@ -1,7 +1,4 @@
 {
-  "https://openai.com/index/decisions-api": "2026-10-23",
-  "https://www.anthropic.com/research/formal-verification": "2026-10-23",
-  "https://simonwillison.net/2026/Oct/22/donating-agent-skills/": "2026-10-23",
   "https://simonwillison.net/2026/Oct/23/kimi-k31-pro/": "2026-10-24",
   "https://github.com/slee-persis/GVS5H": "2026-10-25",
   "https://danluu.com/ambitious/": "2026-10-25",
@@ -49,5 +46,10 @@
   "https://deepmind.google/blog/gemini-omni-12-flash-fast-and-cost-effective-with-longer-clips/": "2026-11-06",
   "https://github.com/rivet-dev/rivet": "2026-11-06",
   "https://github.com/anthropics/claude-code/issues/107757": "2026-11-06",
-  "https://simonwillison.net/2026/Nov/3/qwen-can-interpret-model-weights/": "2026-11-06"
+  "https://simonwillison.net/2026/Nov/3/qwen-can-interpret-model-weights/": "2026-11-06",
+  "https://hightouch.com/blog/llm-judges-identity-resolution": "2026-11-07",
+  "https://blog.google/innovation-and-ai/technology/developers-tools/introducing-gemini-omni-1-2-flash/": "2026-11-07",
+  "https://github.com/andrewboldi/tmux-restore": "2026-11-07",
+  "https://openai.com/index/introducing-gpt-6-cyber": "2026-11-07",
+  "https://openai.com/index/measuring-how-ai-agents-handle-wet-lab-science": "2026-11-07"
 }
