@@ -1,11 +1,4 @@
 {
-  "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-carbon/": "2026-10-29",
-  "https://gist.github.com/flamerix-ai/c3905705cc4205e5de3011fa2e74efce": "2026-10-29",
-  "https://simonwillison.net/2026/Oct/26/gpt-61-terra/": "2026-10-29",
-  "https://cursor.com/blog/agent-sdk": "2026-10-29",
-  "https://divagr.com/blog/qwenputer": "2026-10-29",
-  "https://the-decoder.com/openais-isolated-ai-agents-found-ways-to-talk-to-each-other-through-cpu-cache/": "2026-10-29",
-  "https://simonwillison.net/2026/Oct/26/webframe-evaluation/": "2026-10-29",
   "https://deepmind.google/blog/gemini-4-carbon-our-next-frontier-model/": "2026-10-30",
   "https://mistral.ai/news/mistral-large-4-oss/": "2026-10-30",
   "https://labs.ycombinator.com/projects/games/index.html": "2026-10-30",
@@ -54,5 +47,10 @@
   "https://deepmind.google/blog/introducing-alphaproof-code/": "2026-11-11",
   "https://simonwillison.net/2026/Nov/11/gemini-decisions-api/": "2026-11-12",
   "https://simonwillison.net/2026/Nov/10/llm-gemini/": "2026-11-12",
-  "https://simonwillison.net/2026/Nov/11/aws-emulator/": "2026-11-12"
+  "https://simonwillison.net/2026/Nov/11/aws-emulator/": "2026-11-12",
+  "https://antigravity.google/blog/gemini-4-hydrogen-in-google-antigravity/": "2026-11-13",
+  "https://github.com/Parcha-ai/agentrun/blob/main/README.md": "2026-11-13",
+  "https://brave.com/blog/search-api-agentic-payments/": "2026-11-13",
+  "https://edge0.ai/blog/introducing-edge0-145b-frontier-ai-capabilities-on-your-own-computer": "2026-11-13",
+  "https://github.com/KoljaB/RealtimeVAD": "2026-11-13"
 }
