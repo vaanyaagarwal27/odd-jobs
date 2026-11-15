@@ -1,9 +1,4 @@
 {
-  "https://phorion.io/blog/offical-claude-code-vsx-compromise/": "2026-10-31",
-  "https://github.com/dbreunig/nesformer": "2026-10-31",
-  "https://research.google/blog/the-sleep-framework-a-new-way-for-llms-to-retain-knowledge-in-continual-learning/": "2026-10-31",
-  "https://simonwillison.net/2026/Oct/30/nesformer/": "2026-10-31",
-  "https://simonwillison.net/2026/Oct/29/api-credits/": "2026-10-31",
   "https://github.com/guregodevo/memdoor/tree/main/examples/workflows/team-solve": "2026-11-01",
   "https://www.parameter.ai/labs/we-found-a-gap-at-openai": "2026-11-01",
   "https://openai.com/index/how-we-detect-frontier-model-misalignment": "2026-11-01",
@@ -50,5 +45,10 @@
   "https://openai.com/index/introducing-chatgpt-wallet": "2026-11-14",
   "https://github.com/ggml-org/ggml/releases/tag/v1.0.0": "2026-11-14",
   "https://unsloth.ai/docs/models/qwen3.8": "2026-11-14",
-  "https://haddyalchaer.com/jepa": "2026-11-14"
+  "https://haddyalchaer.com/jepa": "2026-11-14",
+  "https://simonwillison.net/2026/Nov/12/llm-gemini/": "2026-11-15",
+  "https://github.com/Tthanh2k6/turbo-browser-mcp": "2026-11-15",
+  "https://www.crissyfield.de/research/lovable-en/": "2026-11-15",
+  "https://github.com/Vaibhaav-Tiwari/deepseek-v3-jax": "2026-11-15",
+  "https://simonwillison.net/2026/Nov/14/datasette-llm/": "2026-11-15"
 }
