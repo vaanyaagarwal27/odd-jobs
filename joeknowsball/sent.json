@@ -1,5 +1,4 @@
 {
-  "https://simonwillison.net/2026/Oct/31/how-we-took-over-chatgpt-accounts/": "2026-11-02",
   "https://www.ricursive.com/ripple": "2026-11-05",
   "https://huggingface.co/moonshotai/Kimi-K3.1-Pro": "2026-11-05",
   "https://openai.com/index/introducing-images-2-6": "2026-11-05",
@@ -48,5 +47,11 @@
   "https://simonwillison.net/2026/Nov/14/datasette-llm/": "2026-11-15",
   "https://qwen.ai/blog?id=qwen4-max": "2026-11-16",
   "https://www.youtube.com/watch?v=WPj3aQ-xxpI": "2026-11-16",
-  "https://simonwillison.net/2026/Nov/15/datasette-agent/": "2026-11-16"
+  "https://simonwillison.net/2026/Nov/15/datasette-agent/": "2026-11-16",
+  "https://openai.com/index/introducing-gpt-6-2-astra-sol/": "2026-11-18",
+  "https://runta.com/blog/introducing-frontierharness-eval-v1-1/": "2026-11-18",
+  "https://simonwillison.net/2026/Nov/17/external-sandboxes-for-coding-agents/": "2026-11-18",
+  "https://complexdiscovery.com/harvard-researchers-find-ai-coding-agents-shifted-the-bottleneck-to-code-review/": "2026-11-18",
+  "https://microsoft.ai/news/introducing-mai-code-2-and-mai-code-2-flash/": "2026-11-18",
+  "https://starsling.dev": "2026-11-18"
 }
