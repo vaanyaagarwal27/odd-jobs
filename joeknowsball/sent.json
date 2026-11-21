@@ -1,9 +1,4 @@
 {
-  "https://mcp-explained.com/": "2026-11-06",
-  "https://deepmind.google/blog/gemini-omni-12-flash-fast-and-cost-effective-with-longer-clips/": "2026-11-06",
-  "https://github.com/rivet-dev/rivet": "2026-11-06",
-  "https://github.com/anthropics/claude-code/issues/107757": "2026-11-06",
-  "https://simonwillison.net/2026/Nov/3/qwen-can-interpret-model-weights/": "2026-11-06",
   "https://hightouch.com/blog/llm-judges-identity-resolution": "2026-11-07",
   "https://blog.google/innovation-and-ai/technology/developers-tools/introducing-gemini-omni-1-2-flash/": "2026-11-07",
   "https://github.com/andrewboldi/tmux-restore": "2026-11-07",
@@ -57,5 +52,12 @@
   "https://simonwillison.net/2026/Nov/18/llm-gemini/": "2026-11-20",
   "https://openai.com/index/research-acceleration-jagged-frontier": "2026-11-20",
   "https://openai.com/index/how-openai-performance-factory-keeps-chatgpt-fast": "2026-11-20",
-  "https://blog.platypush.tech/article/Rewriting-my-voice-assistant-pipeline": "2026-11-20"
+  "https://blog.platypush.tech/article/Rewriting-my-voice-assistant-pipeline": "2026-11-20",
+  "https://arxiv.org/abs/2611.21885": "2026-11-21",
+  "https://openai.com/index/combatting-adversarial-distillation": "2026-11-21",
+  "https://simonwillison.net/2026/Nov/20/token-fraud-is-here-and-its-bad/": "2026-11-21",
+  "https://www.masteringemacs.org/article/announcing-dreamcoder": "2026-11-21",
+  "https://simonwillison.net/2026/Nov/20/levent-alpoge/": "2026-11-21",
+  "https://simonwillison.net/2026/Nov/18/daniel-stenberg/": "2026-11-21",
+  "https://openai.com/business/learn/codex-security-plugin-demo": "2026-11-21"
 }
