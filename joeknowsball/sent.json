@@ -1,9 +1,4 @@
 {
-  "https://hightouch.com/blog/llm-judges-identity-resolution": "2026-11-07",
-  "https://blog.google/innovation-and-ai/technology/developers-tools/introducing-gemini-omni-1-2-flash/": "2026-11-07",
-  "https://github.com/andrewboldi/tmux-restore": "2026-11-07",
-  "https://openai.com/index/introducing-gpt-6-cyber": "2026-11-07",
-  "https://openai.com/index/measuring-how-ai-agents-handle-wet-lab-science": "2026-11-07",
   "https://apiiro.com/blog/coding-agents-leaking-secrets-github-dont-ask-again": "2026-11-08",
   "https://simonwillison.net/2026/Nov/9/llm-anthropic/": "2026-11-10",
   "https://simonwillison.net/2026/Nov/10/muse-ember/": "2026-11-10",
@@ -59,5 +54,12 @@
   "https://www.masteringemacs.org/article/announcing-dreamcoder": "2026-11-21",
   "https://simonwillison.net/2026/Nov/20/levent-alpoge/": "2026-11-21",
   "https://simonwillison.net/2026/Nov/18/daniel-stenberg/": "2026-11-21",
-  "https://openai.com/business/learn/codex-security-plugin-demo": "2026-11-21"
+  "https://openai.com/business/learn/codex-security-plugin-demo": "2026-11-21",
+  "https://simonwillison.net/2026/Nov/20/llm-gemini/": "2026-11-22",
+  "https://www.pandex.io": "2026-11-22",
+  "https://sgiannopoulos.github.io/blog/machine-code-programming/": "2026-11-22",
+  "https://github.com/ShinMegamiBoson/lookatmyquant": "2026-11-22",
+  "https://openrouter.ai/blog/announcements/data-processing-incidents-on-inference-providers/": "2026-11-22",
+  "https://www.together.ai/blog/security-event-prompt-leakage-for-requests-in-june-and-july-of-2026": "2026-11-22",
+  "https://www.dragos.com/blog/ai-supply-chain-security-canary-tokens": "2026-11-22"
 }
