@@ -1,5 +1,4 @@
 {
-  "https://apiiro.com/blog/coding-agents-leaking-secrets-github-dont-ask-again": "2026-11-08",
   "https://simonwillison.net/2026/Nov/9/llm-anthropic/": "2026-11-10",
   "https://simonwillison.net/2026/Nov/10/muse-ember/": "2026-11-10",
   "https://simonwillison.net/2026/Nov/10/prompting-claude-fable-52/": "2026-11-10",
@@ -61,5 +60,11 @@
   "https://github.com/ShinMegamiBoson/lookatmyquant": "2026-11-22",
   "https://openrouter.ai/blog/announcements/data-processing-incidents-on-inference-providers/": "2026-11-22",
   "https://www.together.ai/blog/security-event-prompt-leakage-for-requests-in-june-and-july-of-2026": "2026-11-22",
-  "https://www.dragos.com/blog/ai-supply-chain-security-canary-tokens": "2026-11-22"
+  "https://www.dragos.com/blog/ai-supply-chain-security-canary-tokens": "2026-11-22",
+  "https://z.ai/blog/glm-5.4": "2026-11-24",
+  "https://huggingface.co/nari-labs/Qwen3.8-27B-NariQ-GGUF": "2026-11-24",
+  "https://openai.com/index/perplexity-and-intelligence": "2026-11-24",
+  "https://arxiv.org/abs/2602.20031": "2026-11-24",
+  "https://simonwillison.net/2026/Nov/24/datasette-charts/": "2026-11-24",
+  "https://simonwillison.net/2026/Nov/21/muru/": "2026-11-24"
 }
