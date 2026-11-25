@@ -1,7 +1,4 @@
 {
-  "https://simonwillison.net/2026/Nov/9/llm-anthropic/": "2026-11-10",
-  "https://simonwillison.net/2026/Nov/10/muse-ember/": "2026-11-10",
-  "https://simonwillison.net/2026/Nov/10/prompting-claude-fable-52/": "2026-11-10",
   "https://deepmind.google/blog/gemini-4-carbon-is-now-available/": "2026-11-11",
   "https://github.com/GoogleChrome/modern-web-guidance": "2026-11-11",
   "https://claude.com/resources/articles/sheets-whiteboards-data": "2026-11-11",
@@ -66,5 +63,12 @@
   "https://openai.com/index/perplexity-and-intelligence": "2026-11-24",
   "https://arxiv.org/abs/2602.20031": "2026-11-24",
   "https://simonwillison.net/2026/Nov/24/datasette-charts/": "2026-11-24",
-  "https://simonwillison.net/2026/Nov/21/muru/": "2026-11-24"
+  "https://simonwillison.net/2026/Nov/21/muru/": "2026-11-24",
+  "https://news.ycombinator.com/item?id=50634426": "2026-11-25",
+  "https://simonwillison.net/2026/Nov/23/glm-54/": "2026-11-25",
+  "https://simonwillison.net/2026/Nov/24/llm-inflection-points/": "2026-11-25",
+  "https://www.lesswrong.com/posts/7wzWuLP3HhyBLmKfo/models-can-communicate-via-inference-servers-despite-being": "2026-11-25",
+  "https://noahbuilt.it/writing/qwen-on-5600-lambdas": "2026-11-25",
+  "https://prismml.com/news/bonsai-2-5-27b": "2026-11-25",
+  "https://simonwillison.net/2026/Nov/24/datasette-agent/": "2026-11-25"
 }
