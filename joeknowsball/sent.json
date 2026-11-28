@@ -1,9 +1,4 @@
 {
-  "https://antigravity.google/blog/gemini-4-hydrogen-in-google-antigravity/": "2026-11-13",
-  "https://github.com/Parcha-ai/agentrun/blob/main/README.md": "2026-11-13",
-  "https://brave.com/blog/search-api-agentic-payments/": "2026-11-13",
-  "https://edge0.ai/blog/introducing-edge0-145b-frontier-ai-capabilities-on-your-own-computer": "2026-11-13",
-  "https://github.com/KoljaB/RealtimeVAD": "2026-11-13",
   "https://deepmind.google/blog/introducing-gemini-4-hydrogen/": "2026-11-14",
   "https://openai.com/index/introducing-chatgpt-wallet": "2026-11-14",
   "https://github.com/ggml-org/ggml/releases/tag/v1.0.0": "2026-11-14",
@@ -63,5 +58,6 @@
   "https://simonwillison.net/2026/Nov/24/datasette-agent/": "2026-11-25",
   "https://techstackups.com/articles/google-workspace-ai-agents-mcp/": "2026-11-27",
   "https://deepmind.google/blog/interpreting-mass-spectra-with-google-antigravity/": "2026-11-27",
-  "https://commandcode.ai/moat": "2026-11-27"
+  "https://commandcode.ai/moat": "2026-11-27",
+  "https://research.google/blog/supercharging-transformer-residual-connections/": "2026-11-28"
 }
